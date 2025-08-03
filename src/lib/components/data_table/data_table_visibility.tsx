@@ -6,7 +6,7 @@ import {
     DropdownMenuTrigger,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
-} from "../";
+} from "..";
 import { IconColumns } from "../../icons";
 
 interface DataTableVisibilityProps<TData> {

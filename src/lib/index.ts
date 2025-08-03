@@ -1,2 +1,13 @@
-import './tailwind/theme.css'
-export * from './components'
+import "./tailwind/theme.css"
+
+// ##### COMPONENTS #####
+export * from "./components/index";
+
+// ##### HOOKS #####
+export * from "./hooks/index";
+
+// ##### ICONS #####
+export * from "./icons/index"
+
+// ##### SHARED #####
+export * from "./shared/index"

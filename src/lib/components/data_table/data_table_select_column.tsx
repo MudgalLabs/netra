@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Checkbox } from "../";
+import { Checkbox } from "..";
 
 const DATA_TABLE_SELECT_COLUMN_ID = "__select__";
 

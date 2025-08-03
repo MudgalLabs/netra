@@ -7,7 +7,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "../";
+} from "..";
 
 interface DataTableProps<TData> {
     table: TableProp<TData>;
