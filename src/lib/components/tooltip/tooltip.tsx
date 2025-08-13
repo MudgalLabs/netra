@@ -78,6 +78,8 @@ const Tooltip: FC<TooltipProps> = ({
     );
 };
 
+const TooltipProvider = TooltipPrimitive.Provider;
+
 Tooltip.displayName = "Tooltip";
-export { Tooltip };
+export { Tooltip, TooltipProvider };
 export type { TooltipProps };

@@ -1,7 +1,8 @@
 {
   "name": "netra",
+  "description": "Collection of components, icons, hooks and helpers for building React apps at Mudgal Labs",
   "private": false,
-  "version": "0.0.15",
+  "version": "0.1.0",
   "packageManager": "pnpm@10.12.1",
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "dev": "storybook dev -p 6006",
     "build": "storybook build",
     "build:lib": "tsc && vite build",
+    "local": "npm run build:lib && npm pack",
     "lint": "npx @biomejs/biome lint --write ./src",
     "format": "npx @biomejs/biome check --write --organize-imports-enabled=true ./src",
     "test": "vitest",

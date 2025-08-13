@@ -1,7 +1,7 @@
 import { FC, ComponentProps, useState } from "react";
 
 import { cn } from "../../shared/utils";
-import { InputErrorMessage } from "../index";
+import { ErrorMessage } from "../index";
 
 interface InputProps extends ComponentProps<"input"> {
     hidePlaceholderOnFocus?: boolean;
@@ -66,7 +66,7 @@ const Input: FC<InputProps> = (props) => {
                 {...rest}
             />
 
-            {error && errorMsg && <InputErrorMessage errorMsg={errorMsg} />}
+            {error && errorMsg && <ErrorMessage errorMsg={errorMsg} />}
         </>
     );
 };

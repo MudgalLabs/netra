@@ -400,3 +400,54 @@ export const BROWSER_TIMEZONE = getUserTimezone();
 export function getUserTimezone(): string {
     return Intl.DateTimeFormat().resolvedOptions().timeZone; // e.g. "Asia/Kolkata"
 }
+
+
+// Eg: formatTimeAgo(new Date(Date.now() - 1000 * 60 * 5)); // "5 minutes ago"
+export function formatTimeAgo(date: Date): string {
+  const now = new Date();
+  const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+
+  if (seconds < 60) {
+    return 'less than a minute ago';
+  }
+
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) {
+    return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) {
+    return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+  }
+
+  const days = Math.floor(hours / 24);
+  if (days < 30) {
+    return `${days} day${days === 1 ? '' : 's'} ago`;
+  }
+
+  const months = Math.floor(days / 30);
+  if (months < 12) {
+    return `${months} month${months === 1 ? '' : 's'} ago`;
+  }
+
+  const years = Math.floor(months / 12);
+  return `${years} year${years === 1 ? '' : 's'} ago`;
+}
+
+// formatNumber(1000000) // → "1,000,000"
+// formatNumber(1000000, { notation: "compact" }) // → "1M"
+export function formatNumber(
+    value: number,
+    options: {
+        locale?: string;
+        notation?: "standard" | "compact";
+    } = {}
+) {
+    const { locale = "en-US", notation = "standard" } = options;
+
+    return new Intl.NumberFormat(locale, {
+        notation,
+        compactDisplay: "short",
+    }).format(value);
+}

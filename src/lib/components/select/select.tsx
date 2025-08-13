@@ -4,7 +4,7 @@ import * as SelectPrimitive from "@radix-ui/react-select";
 import { IconCheck, IconChevronDown, IconChevronUp } from "../../icons";
 import { cn } from "../../shared/utils";
 import { useControlled } from "../../hooks/use_controlled";
-import { Loading, InputErrorMessage } from "../index";
+import { Loading, ErrorMessage } from "../index";
 
 interface SelectOptionItem<T = string> {
     value: T;
@@ -104,7 +104,7 @@ const Select: FC<SelectProps> = ({
                 )}
             </SelectPrimitive.Trigger>
 
-            {error && errorMsg && <InputErrorMessage errorMsg={errorMsg} />}
+            {error && errorMsg && <ErrorMessage errorMsg={errorMsg} />}
 
             <SelectPrimitive.Portal container={container}>
                 <SelectPrimitive.Content

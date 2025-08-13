@@ -1,12 +1,12 @@
 import { cn } from "../../shared/utils";
 import { FC } from "react";
 
-interface InputErrorMessageProps {
+interface ErrorMessageProps {
     errorMsg: string;
     className?: string;
 }
 
-export const InputErrorMessage: FC<InputErrorMessageProps> = ({
+export const ErrorMessage: FC<ErrorMessageProps> = ({
     errorMsg,
     className,
 }) => {

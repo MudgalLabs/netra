@@ -13,7 +13,7 @@ export * from "./checkbox/checkbox";
 // CompareSelect
 export * from "./compare_select/compare_select";
 // DataTable
-export * from "./data_table/data_table";
+export * from "./data_table/index";
 // DatePicker
 export * from "./date_picker/date_picker";
 // Dialog
@@ -28,8 +28,12 @@ export * from "./loading/loading";
 export * from "./loading_screen/loading_screen";
 // Input
 export * from "./input/input";
-// InputErrorMessage
-export * from "./input_error_message/input_error_message";
+// ErrorMessage
+export * from "./error_message/error_message";
+// MultiStep
+export * from "./multi_step/multi_step";
+// PageHeading
+export * from "./page_heading/page_heading";
 // PasswordInput
 export * from "./password_input/password_input";
 // Popover

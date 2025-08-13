@@ -1,7 +1,7 @@
 import { FC, ComponentProps } from "react";
 
 import { cn } from "../../shared/utils";
-import { InputErrorMessage } from "../index";
+import { ErrorMessage } from "../index";
 
 interface TextareaProps extends ComponentProps<"textarea"> {
     error?: boolean;
@@ -29,7 +29,7 @@ const Textarea: FC<TextareaProps> = ({
                 {...props}
             />
 
-            {error && errorMsg && <InputErrorMessage errorMsg={errorMsg} />}
+            {error && errorMsg && <ErrorMessage errorMsg={errorMsg} />}
         </>
     );
 };
