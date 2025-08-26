@@ -47,7 +47,7 @@ const Tooltip: FC<TooltipProps> = ({
             <TooltipPrimitive.Portal>
                 <TooltipPrimitive.Content
                     className={cn(
-                        "z-100 m-2 w-fit max-w-72 rounded-md border-1 px-3 py-2 text-[13px] font-normal text-pretty",
+                        "z-100 m-2 w-fit max-w-72 rounded-md border-1 px-3 py-2 text-[13px] font-medium text-pretty",
                         {
                             "bg-surface-3 border-border-soft text-text-primary":
                                 variant === "default",

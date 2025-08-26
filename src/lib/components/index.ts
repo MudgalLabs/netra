@@ -2,6 +2,8 @@
 export * from "./alert/alert";
 // Button
 export * from "./button/button";
+// Breadcrumb
+export * from "./breadcrumb/breadcrumb";
 // Card
 export * from "./card/card";
 // Chart
@@ -46,6 +48,8 @@ export * from "./radio_group/radio_group";
 export * from "./select/select";
 // Seperator
 export * from "./seperator/seperator";
+// Switch
+export * from "./switch/switch";
 // Tag
 export * from "./tag/tag";
 // Table

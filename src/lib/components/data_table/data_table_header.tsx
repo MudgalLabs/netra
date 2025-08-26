@@ -19,7 +19,11 @@ export function DataTableColumnHeader<TData, TValue>({
     disabled = false,
 }: DataTableColumnHeaderProps<TData, TValue>) {
     if (!column || !column.getCanSort()) {
-        return <div className={cn("px-4 py-2", className)}>{title}</div>;
+        return (
+            <div className={cn("px-4 py-2 text-text-muted", className)}>
+                {title}
+            </div>
+        );
     }
 
     return (
