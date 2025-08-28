@@ -2,7 +2,7 @@
     "name": "netra",
     "description": "Collection of components, icons, hooks and helpers for building React apps at Mudgal Labs",
     "private": false,
-    "version": "0.1.4",
+    "version": "0.1.5",
     "packageManager": "pnpm@10.12.1",
     "repository": {
         "type": "git",
@@ -30,7 +30,9 @@
         "lint": "npx @biomejs/biome lint --write ./src",
         "format": "npx @biomejs/biome check --write --organize-imports-enabled=true ./src",
         "test": "vitest",
-        "test:cov": "vitest run --coverage"
+        "test:cov": "vitest run --coverage",
+        "clean": "rm -rf dist",
+        "prepublishOnly": "npm run clean && npm run build && npm pack"
     },
     "dependencies": {
         "@rehookify/datepicker": "^6.6.8",

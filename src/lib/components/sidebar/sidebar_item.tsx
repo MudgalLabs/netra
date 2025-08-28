@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { useIsMobile } from "../../hooks/use_is_mobile";
 import { cn } from "../../shared/utils";
@@ -13,7 +13,7 @@ interface SidebarItemProps {
     isMobile?: boolean;
 }
 
-const SidebarItem: FC<SidebarItemProps> = (props) => {
+export function SidebarItem(props: SidebarItemProps) {
     const { label, icon, open, isActive, onClick } = props;
     const isMobile = useIsMobile();
 
@@ -47,4 +47,4 @@ const SidebarItem: FC<SidebarItemProps> = (props) => {
             {content}
         </Tooltip>
     );
-};
+}

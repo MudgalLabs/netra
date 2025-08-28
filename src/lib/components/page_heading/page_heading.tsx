@@ -11,42 +11,56 @@ import { IconPanelLeftClose, IconPanelLeftOpen } from "../../icons";
 
 interface PageHeadingProps {
     children?: React.ReactNode;
+    hideSidebarToggle?: boolean;
 }
 
-const PageHeading: FC<PageHeadingProps> = memo(({ children }) => {
-    const { isOpen, toggleSidebar } = useSidebar();
+const PageHeading: FC<PageHeadingProps> = memo(
+    ({ children, hideSidebarToggle }) => {
+        const { isOpen, toggleSidebar } = useSidebar();
 
-    return (
-        <>
-            <div className="flex-x text-[16px] font-medium">
-                <Tooltip
-                    content={isOpen ? "Collapse sidebar" : "Expand sidebar"}
-                    delayDuration={500}
-                    contentProps={{ side: "right" }}
-                >
-                    <Button
-                        className="text-text-subtle"
-                        variant="ghost"
-                        size="icon"
-                        type="button"
-                        onClick={toggleSidebar}
-                    >
-                        {isOpen ? (
-                            <IconPanelLeftClose size={18} />
-                        ) : (
-                            <IconPanelLeftOpen size={18} />
-                        )}
-                    </Button>
-                </Tooltip>
+        return (
+            <>
+                <div className="flex-x text-[16px] font-medium">
+                    {!hideSidebarToggle && (
+                        <>
+                            <Tooltip
+                                content={
+                                    isOpen
+                                        ? "Collapse sidebar"
+                                        : "Expand sidebar"
+                                }
+                                delayDuration={500}
+                                contentProps={{ side: "right" }}
+                            >
+                                <Button
+                                    className="text-text-subtle"
+                                    variant="ghost"
+                                    size="icon"
+                                    type="button"
+                                    onClick={toggleSidebar}
+                                >
+                                    {isOpen ? (
+                                        <IconPanelLeftClose size={18} />
+                                    ) : (
+                                        <IconPanelLeftOpen size={18} />
+                                    )}
+                                </Button>
+                            </Tooltip>
 
-                <Separator orientation="vertical" className="mr-1 h-6!" />
+                            <Separator
+                                orientation="vertical"
+                                className="mr-1 h-6!"
+                            />
+                        </>
+                    )}
 
-                {children}
-            </div>
+                    {children}
+                </div>
 
-            <Separator className="mt-2 mb-3" />
-        </>
-    );
-});
+                <Separator className="mt-2 mb-3" />
+            </>
+        );
+    }
+);
 
 export { PageHeading };
