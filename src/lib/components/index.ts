@@ -48,6 +48,9 @@ export * from "./radio_group/radio_group";
 export * from "./select/select";
 // Seperator
 export * from "./seperator/seperator";
+// Sidebar
+export * from "./sidebar/sidebar_context";
+export * from "./sidebar/sidebar_item";
 // Switch
 export * from "./switch/switch";
 // Tag

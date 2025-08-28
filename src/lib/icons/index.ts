@@ -64,9 +64,9 @@ export { LuUsers as IconUsers } from "react-icons/lu";
 export { LuSlidersHorizontal as IconSlidersHorizontal } from "react-icons/lu";
 export { LuBell as IconBell } from "react-icons/lu";
 export { LuTarget as IconTarget } from "react-icons/lu";
-export { LuMegaphone as IconMegaphone } from "react-icons/lu";
+export { HiOutlineMegaphone as IconMegaphone } from "react-icons/hi2";
 export { LuHouse as IconHouse } from "react-icons/lu";
 export { LuSend as IconSend } from "react-icons/lu";
 export { LuSquarePen as IconSquarePen } from "react-icons/lu";
 export { LuZap as IconZap } from "react-icons/lu";
-
+export { LuCheckCheck as IconCheckCheck } from "react-icons/lu";
