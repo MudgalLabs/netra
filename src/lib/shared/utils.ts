@@ -95,34 +95,45 @@ export function roundToNearest15Minutes(date: Date): Date {
 }
 
 /**
- * Represents the time difference between two dates in days, hours, and minutes.
+ * Represents the time difference between two dates in
+ * days, hours, minutes, seconds, and milliseconds.
  */
 interface TimeElapsed {
     days: number;
     hours: number;
     minutes: number;
+    seconds: number;
+    milliseconds: number;
 }
 
 /**
  * Calculates the time elapsed between two Date objects and returns the breakdown
- * in days, hours, and minutes (not total values).
+ * in days, hours, minutes, seconds, and milliseconds.
  */
 export function getElapsedTime(start: Date, end: Date): TimeElapsed {
     if (start > end) {
         console.error(
             "getElapsedTime: start date must be earlier than end date."
         );
-        return { days: 0, hours: 0, minutes: 0 };
+        return { days: 0, hours: 0, minutes: 0, seconds: 0, milliseconds: 0 };
     }
 
-    const diffMs: number = end.getTime() - start.getTime();
-    const totalMinutes: number = Math.floor(diffMs / (1000 * 60));
+    const diffMs = Math.abs(end.getTime() - start.getTime()); // in ms
+    let diff = diffMs / 1000; // in seconds
 
-    const days: number = Math.floor(totalMinutes / (60 * 24));
-    const hours: number = Math.floor((totalMinutes % (60 * 24)) / 60);
-    const minutes: number = totalMinutes % 60;
+    const days = Math.floor(diff / 86400);
+    diff -= days * 86400;
+    const hours = Math.floor(diff / 3600);
+    diff -= hours * 3600;
+    const minutes = Math.floor(diff / 60);
+    diff -= minutes * 60;
+    const seconds = Math.floor(diff);
+    diff -= seconds;
 
-    return { days, hours, minutes };
+    // Remaining milliseconds
+    const milliseconds = Math.floor(diff * 1000);
+
+    return { days, hours, minutes, seconds, milliseconds };
 }
 
 type AnyObject = Record<string, any>;
@@ -401,38 +412,37 @@ export function getUserTimezone(): string {
     return Intl.DateTimeFormat().resolvedOptions().timeZone; // e.g. "Asia/Kolkata"
 }
 
-
 // Eg: formatTimeAgo(new Date(Date.now() - 1000 * 60 * 5)); // "5 minutes ago"
 export function formatTimeAgo(date: Date): string {
-  const now = new Date();
-  const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+    const now = new Date();
+    const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
-  if (seconds < 60) {
-    return 'less than a minute ago';
-  }
+    if (seconds < 60) {
+        return "less than a minute ago";
+    }
 
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) {
-    return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
-  }
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) {
+        return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+    }
 
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) {
-    return `${hours} hour${hours === 1 ? '' : 's'} ago`;
-  }
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) {
+        return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+    }
 
-  const days = Math.floor(hours / 24);
-  if (days < 30) {
-    return `${days} day${days === 1 ? '' : 's'} ago`;
-  }
+    const days = Math.floor(hours / 24);
+    if (days < 30) {
+        return `${days} day${days === 1 ? "" : "s"} ago`;
+    }
 
-  const months = Math.floor(days / 30);
-  if (months < 12) {
-    return `${months} month${months === 1 ? '' : 's'} ago`;
-  }
+    const months = Math.floor(days / 30);
+    if (months < 12) {
+        return `${months} month${months === 1 ? "" : "s"} ago`;
+    }
 
-  const years = Math.floor(months / 12);
-  return `${years} year${years === 1 ? '' : 's'} ago`;
+    const years = Math.floor(months / 12);
+    return `${years} year${years === 1 ? "" : "s"} ago`;
 }
 
 // formatNumber(1000000) // → "1,000,000"
@@ -450,4 +460,67 @@ export function formatNumber(
         notation,
         compactDisplay: "short",
     }).format(value);
+}
+
+export type TimeUnit = "ms" | "s" | "m" | "h" | "d";
+
+/**
+ * Formats the duration between two dates as a human-friendly string.
+ * Examples: "450ms", "45s 120ms", "1m 10s 250ms", "1h 1m 12s", "5d 12h 28m 5s"
+ *
+ * @param from - Start date
+ * @param to - End date
+ * @param options - Optional: specify smallestUnit and largestUnit (e.g. "ms", "s", "m", "h", "d")
+ */
+export function formatDuration(
+    from: Date,
+    to: Date,
+    options: {
+        smallestUnit?: TimeUnit;
+        largestUnit?: TimeUnit;
+    } = {}
+): string {
+    const { smallestUnit = "ms", largestUnit = "d" } = options;
+    const order = ["d", "h", "m", "s", "ms"];
+    const labels: Record<string, string> = {
+        d: "d",
+        h: "h",
+        m: "m",
+        s: "s",
+        ms: "ms",
+    };
+
+    const startIdx = order.indexOf(largestUnit);
+    const endIdx = order.indexOf(smallestUnit);
+
+    // Defensive: if invalid units, fallback to full range
+    const units = order.slice(
+        startIdx >= 0 ? startIdx : 0,
+        endIdx >= 0 ? endIdx + 1 : order.length
+    );
+
+    const elapsed = getElapsedTime(from, to);
+
+    const parts: string[] = [];
+    for (const unit of units) {
+        const value =
+            elapsed[
+                unit === "d"
+                    ? "days"
+                    : unit === "h"
+                    ? "hours"
+                    : unit === "m"
+                    ? "minutes"
+                    : unit === "s"
+                    ? "seconds"
+                    : "milliseconds"
+            ];
+        if (value || parts.length > 0 || unit === smallestUnit) {
+            parts.push(`${value}${labels[unit]}`);
+        }
+    }
+
+    // If all values are zero, show "0ms"
+    if (parts.length === 0) return "0ms";
+    return parts.join(" ");
 }
