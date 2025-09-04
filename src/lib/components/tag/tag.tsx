@@ -53,4 +53,4 @@ function Tag(props: TagProps) {
 }
 
 export { Tag };
-export type { TagProps };
+export type { TagProps, TagVariant, TagSize };
