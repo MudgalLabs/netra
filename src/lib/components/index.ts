@@ -53,6 +53,8 @@ export * from "./sidebar/sidebar_context";
 export * from "./sidebar/sidebar_item";
 // Switch
 export * from "./switch/switch";
+// Tabs
+export * from "./tabs/tabs";
 // Tag
 export * from "./tag/tag";
 // Table
