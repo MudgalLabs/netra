@@ -70,3 +70,5 @@ export { LuSend as IconSend } from "react-icons/lu";
 export { LuSquarePen as IconSquarePen } from "react-icons/lu";
 export { LuZap as IconZap } from "react-icons/lu";
 export { LuCheckCheck as IconCheckCheck } from "react-icons/lu";
+export { LuTag as IconTag } from "react-icons/lu";
+export { LuTags as IconTags } from "react-icons/lu";

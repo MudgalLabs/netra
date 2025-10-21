@@ -44,6 +44,8 @@ export * from "./popover/popover";
 export * from "./progress/progress";
 // RadioGroup
 export * from "./radio_group/radio_group";
+// ScrollArea
+export * from "./scroll_area/scroll_area";
 // Select
 export * from "./select/select";
 // Seperator
