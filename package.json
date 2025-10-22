@@ -2,7 +2,7 @@
     "name": "netra",
     "description": "Collection of components, icons, hooks and helpers for building React apps at Mudgal Labs",
     "private": false,
-    "version": "0.1.18",
+    "version": "0.1.19",
     "packageManager": "pnpm@10.12.1",
     "repository": {
         "type": "git",
