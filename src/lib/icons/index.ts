@@ -72,3 +72,4 @@ export { LuZap as IconZap } from "react-icons/lu";
 export { LuCheckCheck as IconCheckCheck } from "react-icons/lu";
 export { LuTag as IconTag } from "react-icons/lu";
 export { LuTags as IconTags } from "react-icons/lu";
+export { LuChartPie as IconChartPie } from "react-icons/lu";
