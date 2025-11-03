@@ -2,12 +2,9 @@ import { cn } from "../../shared/utils";
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
     return (
-        <div className="border-border-soft relative w-full overflow-hidden overflow-x-auto rounded-md border-1">
+        <div className="border-border-soft relative w-full overflow-hidden overflow-x-auto rounded-md border-1 bg-surface-2">
             <table
-                className={cn(
-                    "w-full caption-bottom bg-transparent text-sm",
-                    className
-                )}
+                className={cn("w-full caption-bottom text-sm", className)}
                 {...props}
             />
             {/* <table className={cn("bg-surface-bg w-full caption-bottom text-sm", className)} {...props} /> */}
@@ -53,7 +50,7 @@ function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
     return (
         <tr
             className={cn(
-                "hover:bg-hover-subtle data-[state=selected]:bg-hover-subtle border-b-border-soft/50 border-b-1 transition-colors",
+                "hover:bg-hover-soft data-[state=selected]:bg-hover-soft border-b-border-soft/50 border-b-1 transition-colors",
                 className
             )}
             {...props}
