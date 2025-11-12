@@ -6,15 +6,20 @@ import {
     DropdownMenuTrigger,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
+    ScrollArea,
 } from "..";
 import { IconColumns } from "../../icons";
+import { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
+import { cn } from "../../shared/utils";
 
-interface DataTableVisibilityProps<TData> {
+interface DataTableVisibilityProps<TData> extends DropdownMenuContentProps {
     table: Table<TData>;
 }
 
 export function DataTableVisibility<TData>({
     table,
+    className,
+    ...dropdownMenuContentProps
 }: DataTableVisibilityProps<TData>) {
     return (
         <DropdownMenu>
@@ -27,26 +32,33 @@ export function DataTableVisibility<TData>({
                     Columns
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="mt-2 min-w-[180px]">
-                {table
-                    .getAllColumns()
-                    .filter((column) => column.getCanHide())
-                    .map((column) => {
-                        return (
-                            <DropdownMenuCheckboxItem
-                                key={column.id}
-                                className="capitalize"
-                                checked={column.getIsVisible()}
-                                onCheckedChange={(value) =>
-                                    column.toggleVisibility(!!value)
-                                }
-                                onSelect={(e) => e.preventDefault()}
-                            >
-                                {column.columnDef.meta
-                                    ?.columnVisibilityHeader || column.id}
-                            </DropdownMenuCheckboxItem>
-                        );
-                    })}
+
+            <DropdownMenuContent
+                align="start"
+                className={cn("mt-2 max-h-[300px] min-w-[180px]", className)}
+                {...dropdownMenuContentProps}
+            >
+                <ScrollArea className="max-h-[260px] overflow-y-auto p-1">
+                    {table
+                        .getAllColumns()
+                        .filter((column) => column.getCanHide())
+                        .map((column) => {
+                            return (
+                                <DropdownMenuCheckboxItem
+                                    key={column.id}
+                                    className="capitalize"
+                                    checked={column.getIsVisible()}
+                                    onCheckedChange={(value) =>
+                                        column.toggleVisibility(!!value)
+                                    }
+                                    onSelect={(e) => e.preventDefault()}
+                                >
+                                    {column.columnDef.meta
+                                        ?.columnVisibilityHeader || column.id}
+                                </DropdownMenuCheckboxItem>
+                            );
+                        })}
+                </ScrollArea>
             </DropdownMenuContent>
         </DropdownMenu>
     );
